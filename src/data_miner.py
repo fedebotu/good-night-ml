@@ -1,4 +1,5 @@
 import numpy as np
+from numpy import array
 import time
 from datetime import date
 import datetime
@@ -10,7 +11,6 @@ import torch
 from statistics import mean
 import sys; sys.path.append("..")
 import os
-print(os.getcwd())
 
 # Transform all the elements in the dataset into date objects and sort them
 def convert_to_dates(dates):
