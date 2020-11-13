@@ -20,7 +20,6 @@ import numpy as np
 from pytg.sender import Sender
 from pytg.receiver import Receiver
 
-good_nighter = "Federico_Berto"#"Eleonora_Morselli" # User to send the good night wishes to
 
 '''
 Sender daemon: our goal is now to build a daemon which, given the prediction, will send the good night message at that time or a bit earlier (we can decide to send it earlier to be more confident about the result
@@ -29,6 +28,13 @@ Sender daemon: our goal is now to build a daemon which, given the prediction, wi
 polling_time = 300 # seconds to wait
 sent = False # We start giving the false condition for sent
 advance_time = 30 # Minutes we send the message in advance with respect to the prediction for being more confident the receiver will get the goodnight promptly
+telegram_path = "/usr/bin/telegram-cli"
+pubkey_path = "/home/fedebotu/tg/server.pub"
+
+'''Create a file with the person to send the good night'''
+with open('data/good_nighter.txt','r') as f:
+    good_nighter = f.read() # User to send the good night wishes to
+f.close()
 
 '''
 Ubuntu instructions:
@@ -36,8 +42,8 @@ Do not install via snap; it won't work. Install via:
 sudo apt install telegram-cli
 '''
 tg = Telegram(
-	telegram="/usr/bin/telegram-cli", 
-	pubkey_file="/home/fedebotu/tg/server.pub")
+	telegram=telegram_path, 
+	pubkey_file=pubkey_path)
 receiver = Receiver(host="localhost", port=4458)
 sender = Sender(host="localhost", port=4458)
 

@@ -1,6 +1,6 @@
 from pytg import Telegram
 import json
-import logging # Useful for debugging
+import logging
 import numpy as np
 from pytg.sender import Sender
 from pytg.receiver import Receiver
@@ -9,12 +9,19 @@ import csv
 import os
 
 logging.basicConfig(filename='logs/telegram-cli.log', filemode='a', level=logging.DEBUG)
-good_nighter = "Eleonora_Morselli" # User to send the good night wishes to
-data_dir = "data"
-dataset = "data/LastSeenDataset.csv"
 
 # Configuration
 polling_time = 30.0 # Seconds
+data_dir = "data"
+dataset = "data/LastSeenDataset.csv"
+telegram_path = "/usr/bin/telegram-cli"
+pubkey_path = "/home/fedebotu/tg/server.pub"
+
+
+'''Create a file with the person to send the good night'''
+with open('data/good_nighter.txt','r') as f:
+    good_nighter = f.read() # User to send the good night wishes to
+f.close()
 
 '''
 Ubuntu instructions:
@@ -22,11 +29,8 @@ Do not install via snap; it won't work. Install via:
 sudo apt install telegram-cli
 '''
 tg = Telegram(
-	telegram="/usr/bin/telegram-cli", 
-	pubkey_file="/home/fedebotu/tg/server.pub")
-
-receiver = Receiver(host="localhost", port=4458)
-sender = Sender(host="localhost", port=4458)
+	telegram=telegram_path, 
+	pubkey_file=pubkey_path)
 
 last_seen = []
 last_seen.append(sender.user_info(good_nighter).when) # Dict Object: parsing via
