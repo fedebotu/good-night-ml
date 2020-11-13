@@ -1,0 +1,73 @@
+DEBUG:parso.cache:pickle loaded: /home/fedebotu/.local/lib/python3.8/site-packages/jedi/third_party/typeshed/stdlib/2and3/builtins.pyi
+DEBUG:parso.cache:pickle loaded: /home/fedebotu/.local/lib/python3.8/site-packages/jedi/third_party/typeshed/stdlib/3/sys.pyi
+DEBUG:parso.python.diff:diff parser start
+DEBUG:parso.python.diff:line_lengths old: 4; new: 4
+DEBUG:parso.python.diff:-> code[equal] old[1:3] new[1:3]
+DEBUG:parso.python.diff:copy old[1:3] new[1:3]
+DEBUG:parso.python.diff:-> code[replace] old[4:4] new[4:4]
+DEBUG:parso.python.diff:parse_part from 4 to 4 (to 3 in part parser)
+DEBUG:parso.python.diff:diff parser end
+DEBUG:parso.python.diff:diff parser start
+DEBUG:parso.python.diff:line_lengths old: 4; new: 4
+DEBUG:parso.python.diff:-> code[equal] old[1:3] new[1:3]
+DEBUG:parso.python.diff:copy old[1:3] new[1:3]
+DEBUG:parso.python.diff:-> code[replace] old[4:4] new[4:4]
+DEBUG:parso.python.diff:parse_part from 4 to 4 (to 3 in part parser)
+DEBUG:parso.python.diff:diff parser end
+DEBUG:parso.cache:pickle loaded: /usr/lib/python3.8/typing.py
+DEBUG:parso.cache:pickle loaded: /home/fedebotu/.local/lib/python3.8/site-packages/jedi/third_party/typeshed/stdlib/3/typing.pyi
+DEBUG:parso.cache:pickle loaded: /home/fedebotu/.local/lib/python3.8/site-packages/pytg/__init__.py
+INFO:pytg:Starting Telegram Executable: "/usr/bin/telegram-cli -R -W -P 4458 -k /home/fedebotu/tg/server.pub --json --permanent-peer-ids --permanent-peer-ids"
+DEBUG:pytg.sender:Parsing raw: Argument help - <command> (needed)
+DEBUG:pytg.sender:Sending command >[disable_preview]  help
+<
+DEBUG:pytg.sender:Socket Connected.
+DEBUG:pytg.sender:All Sent.
+INFO:pytg:CLI available.
+DEBUG:pytg.sender:Parsing send_msg: Argument Federico_Berto - <peer> (needed)
+DEBUG:pytg.sender:Parsing send_msg: Argument Solo chi sogna può volare. Buonanotte Doda 😘
+ - <text> (needed)
+DEBUG:pytg.sender:Sending command >[disable_preview] msg Federico_Berto 'Solo chi sogna può volare. Buonanotte Doda 😘\n'
+<
+DEBUG:pytg.sender:Socket Connected.
+DEBUG:pytg.sender:All Sent.
+DEBUG:parso.cache:pickle loaded: /home/fedebotu/.local/lib/python3.8/site-packages/jedi/third_party/typeshed/stdlib/2and3/builtins.pyi
+DEBUG:parso.python.diff:diff parser start
+DEBUG:parso.python.diff:line_lengths old: 5; new: 5
+DEBUG:parso.python.diff:-> code[equal] old[1:4] new[1:4]
+DEBUG:parso.python.diff:copy old[1:4] new[1:4]
+DEBUG:parso.python.diff:-> code[replace] old[5:5] new[5:5]
+DEBUG:parso.python.diff:parse_part from 5 to 5 (to 4 in part parser)
+DEBUG:parso.python.diff:diff parser end
+DEBUG:parso.cache:pickle loaded: /home/fedebotu/.local/lib/python3.8/site-packages/jedi/third_party/typeshed/stdlib/3/sys.pyi
+INFO:pytg.sender:Quit Sending. Not allowing sending anymore.
+WARNING:pytg.sender:Terminating currently sending request.
+INFO:pytg.sender:Currently not Sending.
+INFO:pytg.sender:Quit Sending. Not allowing sending anymore.
+WARNING:pytg.sender:Terminating currently sending request.
+INFO:pytg.sender:Currently not Sending.
+INFO:pytg:Closing Connections.
+DEBUG:pytg:Closing sender.
+DEBUG:pytg.sender:Already did quit Sending. Not allowing sending.
+WARNING:pytg.sender:Terminating currently sending request.
+INFO:pytg.sender:Currently not Sending.
+DEBUG:pytg:Closing sender.
+DEBUG:pytg.receiver:receiver thread existing: Not created.
+INFO:pytg:Asking to CLI to stop.
+DEBUG:pytg:Sender already stopped. Unable to issue safe_quit or quit to exit via socket.
+INFO:pytg:CLI did stop (1).
+DEBUG:pytg.sender:Already did quit Sending. Not allowing sending.
+INFO:pytg:Starting Telegram Executable: "/usr/bin/telegram-cli -R -W -P 4458 -k /home/fedebotu/tg/server.pub --json --permanent-peer-ids --permanent-peer-ids"
+DEBUG:pytg.sender:Parsing raw: Argument help - <command> (needed)
+DEBUG:pytg.sender:Sending command >[disable_preview]  help
+<
+DEBUG:pytg.sender:Socket Connected.
+DEBUG:pytg.sender:All Sent.
+INFO:pytg:CLI available.
+DEBUG:pytg.sender:Parsing send_msg: Argument Federico_Berto - <peer> (needed)
+DEBUG:pytg.sender:Parsing send_msg: Argument Se cerchi sempre di essere normale non saprai mai quanto puoi essere straordinaria. Buonanotte 🥰
+ - <text> (needed)
+DEBUG:pytg.sender:Sending command >[disable_preview] msg Federico_Berto 'Se cerchi sempre di essere normale non saprai mai quanto puoi essere straordinaria. Buonanotte 🥰\n'
+<
+DEBUG:pytg.sender:Socket Connected.
+DEBUG:pytg.sender:All Sent.

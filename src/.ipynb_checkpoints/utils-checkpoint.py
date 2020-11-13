@@ -1,9 +1,16 @@
-import datetime
-from datetime import timedelta
 import numpy as np
-import torch
 from numpy import array
-
+import time
+from datetime import date
+import datetime
+from datetime import timedelta  
+import csv
+import holidays # for importing the public holidays
+import re
+import torch
+from statistics import mean
+import sys; sys.path.append("..")
+import os
 
 # Transform all the elements in the dataset into date objects and sort them
 def convert_to_dates(dates):
@@ -31,8 +38,8 @@ def to_array(data):
 #     print(inout_seq)
 #     return inout_seq
 
+'''We create a list of training data divided in inputs X and outputs y'''
 def create_inout_sequences(dt, tw, n_features=5):
-    '''We create a list of training data divided in inputs X and outputs y'''
     X = []
     y = []
     L = dt.shape[1]
@@ -43,3 +50,11 @@ def create_inout_sequences(dt, tw, n_features=5):
         train_label = dt[0][i+tw:i+tw+1] 
         X.append(train_seq.numpy()); y.append(train_label.numpy())
     return array(X), array(y)
+
+'''Choose a message from the txt file'''
+import random as rnd
+def choose_message(messages,random=True, number=0):
+    if random:
+        m = rnd.sample(messages, k=1)[0]
+    else: m = messages[number]
+    return m
