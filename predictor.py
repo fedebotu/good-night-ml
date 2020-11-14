@@ -79,9 +79,9 @@ for t in range(train_episodes):
         print(('Step: {:4}   |   Loss: {:.6f} ').format(t, loss.item()))
 
 # TEST
-with torch.no_grad():
-    print('Predicted:', mv_net(torch.tensor(X[4:7,:,:],dtype=torch.float32))[0])
-    print('Real:', y[4])
+#with torch.no_grad():
+#    print('Predicted:', mv_net(torch.tensor(X[4:7,:,:],dtype=torch.float32))[0])
+#    print('Real:', y[4])
 
 '''Replace prediction time with today's date'''
 now = datetime.datetime.now()

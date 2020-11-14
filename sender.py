@@ -33,8 +33,9 @@ pubkey_path = "/home/fedebotu/tg/server.pub"
 
 '''Create a file with the person to send the good night'''
 with open('data/good_nighter.txt','r') as f:
-    good_nighter = f.read() # User to send the good night wishes to
+    good_nighter = "Federico_Berto" # str(f.read()) # User to send the good night wishes to
 f.close()
+print(good_nighter)
 
 '''
 Ubuntu instructions:
@@ -47,7 +48,7 @@ tg = Telegram(
 receiver = Receiver(host="localhost", port=4458)
 sender = Sender(host="localhost", port=4458)
 
-with open('prediction.txt', 'r') as f:
+with open('data/prediction.txt', 'r') as f:
     # convert to string
     prediction = datetime.datetime.strptime(f.read(), "%Y-%m-%d %H:%M:%S\n" ) 
 f.close()
@@ -70,7 +71,7 @@ while True:
         sent = True
         print("Message has been sent")
     
-    with open('prediction.txt', 'r') as f:
+    with open('data/prediction.txt', 'r') as f:
         # convert to string
         old = prediction
         prediction = datetime.datetime.strptime(f.read(), "%Y-%m-%d %H:%M:%S\n")

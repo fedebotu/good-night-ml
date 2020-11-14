@@ -32,6 +32,9 @@ tg = Telegram(
 	telegram=telegram_path, 
 	pubkey_file=pubkey_path)
 
+receiver = Receiver(host="localhost", port=4458)
+sender = Sender(host="localhost", port=4458)
+
 last_seen = []
 last_seen.append(sender.user_info(good_nighter).when) # Dict Object: parsing via
 try:
