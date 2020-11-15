@@ -1,3 +1,18 @@
+import numpy as np
+from numpy import array
+import time
+from datetime import date
+import datetime
+from datetime import timedelta  
+import csv
+import holidays # for importing the public holidays
+import re
+import torch
+from statistics import mean
+import sys; sys.path.append("..")
+import os
+
+
 class LSTM(torch.nn.Module):
     '''We use a model which should predict time series data (e.g. RNN, LSTM, Transformer)'''
     def __init__(self,n_features,seq_length, n_hidden=20, n_layers=1):
@@ -23,8 +38,9 @@ class LSTM(torch.nn.Module):
         self.hidden = (hidden_state, cell_state)
     
     def forward(self, x):        
-        batch_size, seq_len, _ = x.size()   
+        batch_size, seq_len, _ = x.size()
         lstm_out, self.hidden = self.l_lstm(x,self.hidden)
+
         # lstm_out(with batch_first = True) is 
         # (batch_size,seq_len,num_directions * hidden_size)
         # for following linear layer we want to keep batch_size dimension and merge rest       
