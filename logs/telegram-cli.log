@@ -803,3 +803,36 @@ INFO:pytg:Asking to CLI to stop.
 DEBUG:pytg:Sender already stopped. Unable to issue safe_quit or quit to exit via socket.
 INFO:pytg:CLI did stop (1).
 DEBUG:pytg.sender:Already did quit Sending. Not allowing sending.
+INFO:pytg:Starting Telegram Executable: "/usr/bin/telegram-cli -R -W -P 4458 -k /home/fedebotu/tg/server.pub --json --permanent-peer-ids --permanent-peer-ids"
+DEBUG:pytg.sender:Parsing raw: Argument help - <command> (needed)
+DEBUG:pytg.sender:Sending command >[disable_preview]  help
+<
+INFO:pytg:CLI did not responde.
+DEBUG:pytg.sender:Parsing raw: Argument help - <command> (needed)
+DEBUG:pytg.sender:Sending command >[disable_preview]  help
+<
+DEBUG:pytg.sender:Socket Connected.
+DEBUG:pytg.sender:All Sent.
+INFO:pytg:CLI available.
+DEBUG:pytg.sender:Parsing user_info: Argument Federico_Berto
+ - <user> (needed)
+DEBUG:pytg.sender:Sending command >[disable_preview] user_info Federico_Berto
+
+<
+DEBUG:pytg.sender:Socket Connected.
+DEBUG:pytg.sender:All Sent.
+INFO:pytg.sender:Quit Sending. Not allowing sending anymore.
+WARNING:pytg.sender:Terminating currently sending request.
+INFO:pytg.sender:Currently not Sending.
+INFO:pytg.sender:Quit Sending. Not allowing sending anymore.
+WARNING:pytg.sender:Terminating currently sending request.
+INFO:pytg.sender:Currently not Sending.
+INFO:pytg:Closing Connections.
+DEBUG:pytg:Closing sender.
+DEBUG:pytg.sender:Already did quit Sending. Not allowing sending.
+WARNING:pytg.sender:Terminating currently sending request.
+INFO:pytg.sender:Currently not Sending.
+DEBUG:pytg:Closing sender.
+DEBUG:pytg.receiver:receiver thread existing: Not created.
+INFO:pytg:Asking to CLI to stop.
+DEBUG:pytg:Sender already stopped. Unable to issue safe_quit or quit to exit via socket.

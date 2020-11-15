@@ -86,7 +86,7 @@ for t in range(train_episodes):
 '''Replace prediction time with today's date'''
 now = datetime.datetime.now()
 with torch.no_grad():
-    p = mv_net.forward(torch.tensor(X[-batch_size-2:-2:,:],dtype=torch.float32))[0].numpy()
+    p = mv_net.forward(torch.tensor(X[-batch_size-1:-1,:],dtype=torch.float32))[0].numpy()
 p_sec = int(p[0]*(max_hour+24-min_hour)*3600)
 prediction = now.replace(hour=min_hour, minute=0, second=0) + timedelta(seconds=p_sec)
 print('Expected time to go to sleep: ', prediction.strftime("%Y-%m-%d %H:%M:%S"))
