@@ -45,6 +45,7 @@ sudo apt install telegram-cli
 tg = Telegram(
 	telegram=telegram_path, 
 	pubkey_file=pubkey_path)
+
 receiver = Receiver(host="localhost", port=4458)
 sender = Sender(host="localhost", port=4458)
 

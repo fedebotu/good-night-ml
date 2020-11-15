@@ -38,8 +38,9 @@ class LSTM(torch.nn.Module):
         self.hidden = (hidden_state, cell_state)
     
     def forward(self, x):        
-        batch_size, seq_len, _ = x.size()   
+        batch_size, seq_len, _ = x.size()
         lstm_out, self.hidden = self.l_lstm(x,self.hidden)
+
         # lstm_out(with batch_first = True) is 
         # (batch_size,seq_len,num_directions * hidden_size)
         # for following linear layer we want to keep batch_size dimension and merge rest       
