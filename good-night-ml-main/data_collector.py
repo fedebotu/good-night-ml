@@ -8,11 +8,7 @@ import time
 import csv
 import os
 
-logging.basicConfig(logging.basicConfig(filename='logs/telegram-cli.log', filemode='a',
-    format='%(asctime)s %(levelname)-8s %(message)s',
-    level=logging.INFO,
-    datefmt='%Y-%m-%d %H:%M:%S')
-
+logging.basicConfig(filename='logs/telegram-cli.log', filemode='a', level=logging.DEBUG)
 
 # Configuration
 polling_time = 30.0 # Seconds

@@ -8,6 +8,7 @@ import csv
 import holidays # for importing the public holidays
 import re
 import torch
+from torch import nn
 from statistics import mean
 import sys; sys.path.append("..")
 import os
@@ -15,21 +16,21 @@ import os
 
 class LSTM(torch.nn.Module):
     '''We use a model which should predict time series data (e.g. RNN, LSTM, Transformer)'''
-    def __init__(self,n_features,seq_length, n_hidden=20, n_layers=1):
+    def __init__(self,n_features,seq_length, n_hidden=100, n_layers=1):
         super(LSTM, self).__init__()
         self.n_features = n_features
         self.seq_len = seq_length
         self.n_hidden = n_hidden # number of hidden states
         self.n_layers = n_layers # number of LSTM layers (stacked)
     
-        self.l_lstm = torch.nn.LSTM(input_size = n_features, 
+        self.l_lstm = nn.LSTM(input_size = n_features, 
                                  hidden_size = self.n_hidden,
                                  num_layers = self.n_layers, 
                                  batch_first = True)
         # according to pytorch docs LSTM output is 
         # (batch_size,seq_len, num_directions * hidden_size)
         # when considering batch_first = True
-        self.l_linear = torch.nn.Linear(self.n_hidden*self.seq_len, 1)
+        self.l_linear = nn.Linear(self.n_hidden*self.seq_len, 1)
         
     def init_hidden(self, batch_size):
         # even with batch_first = True this remains same as docs
@@ -43,7 +44,63 @@ class LSTM(torch.nn.Module):
 
         # lstm_out(with batch_first = True) is 
         # (batch_size,seq_len,num_directions * hidden_size)
-        # for following linear layer we want to keep batch_size dimension and merge rest       
         # .contiguous() -> solves tensor compatibility error
         x = lstm_out.contiguous().view(batch_size,-1)
         return self.l_linear(x)
+
+    
+class RNN(nn.Module):
+    """https://www.kaggle.com/kanncaa1/recurrent-neural-network-with-pytorch"""
+    def __init__(self, input_dim, output_dim, hidden_dim=100, layer_dim=1):
+        super(RNN, self).__init__()
+
+        # Number of hidden dimensions
+        self.hidden_dim = hidden_dim
+        
+        # Number of hidden layers
+        self.layer_dim = layer_dim
+        
+        # RNN
+        self.rnn = nn.RNN(input_dim, hidden_dim, layer_dim, batch_first=True, nonlinearity='relu')
+        
+        # Readout layer
+        self.fc = nn.Linear(hidden_dim, output_dim)
+    
+    def forward(self, x):
+        
+        # Initialize hidden state with zeros
+        h0 = Variable(torch.zeros(self.layer_dim, x.size(0), self.hidden_dim))
+            
+        # One time step
+        out, hn = self.rnn(x, h0)
+        out = self.fc(out[:, -1, :]) 
+        return out
+    
+    
+class SimpleRNN(nn.Module):
+    """https://gist.github.com/spro"""
+    def __init__(self, hidden_size=10):
+        super(SimpleRNN, self).__init__()
+        self.hidden_size = hidden_size
+
+        self.inp = nn.Linear(1, hidden_size)
+        self.rnn = nn.LSTM(hidden_size, hidden_size, 2, dropout=0.05)
+        self.out = nn.Linear(hidden_size, 1)
+
+    def step(self, input, hidden=None):
+        input = self.inp(input.view(1, -1)).unsqueeze(1)
+        output, hidden = self.rnn(input, hidden)
+        output = self.out(output.squeeze(1))
+        return output, hidden
+
+    def forward(self, inputs, hidden=None, force=True, steps=0):
+        if force or steps == 0: steps = len(inputs)
+        outputs = Variable(torch.zeros(steps, 1, 1))
+        for i in range(steps):
+            if force or i == 0:
+                input = inputs[i]
+            else:
+                input = output
+            output, hidden = self.step(input, hidden)
+            outputs[i] = output
+        return outputs, hidden
