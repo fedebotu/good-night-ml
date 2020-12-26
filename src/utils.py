@@ -38,8 +38,8 @@ def to_array(data):
 #     print(inout_seq)
 #     return inout_seq
 
-'''We create a list of training data divided in inputs X and outputs y'''
-def create_inout_sequences(dt, tw, n_features=5):
+def create_sequences(dt, tw, n_features=5, data_type=torch.float32):
+    '''We create a list of training data divided in inputs X and outputs y'''
     X = []
     y = []
     L = dt.shape[1]
@@ -48,12 +48,13 @@ def create_inout_sequences(dt, tw, n_features=5):
         for j in range(n_features):
             train_seq[j]= dt[j][i:i+tw]
         train_label = dt[0][i+tw:i+tw+1] 
-        X.append(train_seq.numpy()); y.append(train_label.numpy())
-    return array(X), array(y)
+        X.append(train_seq)
+        y.append(train_label)
+    return torch.transpose(torch.stack(X), 2, 1).type(data_type), torch.stack(y).type(data_type)
 
-'''Choose a message from the txt file'''
 import random as rnd
 def choose_message(messages,random=True, number=0):
+    '''Choose a random message from the txt file'''
     if random:
         m = rnd.sample(messages, k=1)[0]
     else: m = messages[number]

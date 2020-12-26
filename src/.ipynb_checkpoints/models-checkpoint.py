@@ -13,10 +13,32 @@ from statistics import mean
 import sys; sys.path.append("..")
 import os
 
-
+class MLP(nn.Module):
+    """Multi-Layer Perceptron: this is the 
+    simplest Deep Neural Network model
+    https://www.kaggle.com/pinocookie/pytorch-simple-mlp"""
+    def __init__(self, input_dim, output_dim, hidden_layer=100):
+        super(MLP, self).__init__()
+        self.input_dim = input_dim
+        self.output_dim = output_dim
+        self.hidden_layer = hidden_layer
+        self.layers = nn.Sequential(
+            nn.Linear(self.input_dim, self.hidden_layer),
+            nn.ReLU(),
+            nn.Linear(self.hidden_layer, self.output_dim),
+            #nn.Sigmoid() # use for constraining the output to [0,1]
+        )
+        
+    def forward(self, x):
+        # convert tensor (128, 1, 28, 28) --> (128, 1*28*28)
+        x = x.reshape(1,self.input_dim)
+        x = self.layers(x)
+        return x
+    
+    
 class LSTM(torch.nn.Module):
     '''We use a model which should predict time series data (e.g. RNN, LSTM, Transformer)'''
-    def __init__(self,n_features,seq_length, n_hidden=100, n_layers=1):
+    def __init__(self,n_features,seq_length, n_hidden=1000, n_layers=1):
         super(LSTM, self).__init__()
         self.n_features = n_features
         self.seq_len = seq_length
