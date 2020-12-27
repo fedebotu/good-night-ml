@@ -1,6 +1,5 @@
 archive/
 .ipynb_checkpoints/
-data/good_nighter.txt
 logs/
 .git/
 __pycache__
