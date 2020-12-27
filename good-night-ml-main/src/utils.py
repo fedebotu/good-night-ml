@@ -51,6 +51,17 @@ def create_inout_sequences(dt, tw, n_features=5):
         X.append(train_seq.numpy()); y.append(train_label.numpy())
     return array(X), array(y)
 
+'''Get latest sequence for making prediction'''
+def get_latest_sequence(dt, tw, n_features=5):
+    X = []
+    idx = dt.shape[1]-1 # index of the last element
+    for i in range(tw):
+        seq = torch.zeros(n_features, tw)
+        for j in range(n_features):
+            seq[j]= dt[j][idx-tw:idx]
+        X.append(seq.numpy())
+    return array(X)
+
 '''Choose a message from the txt file'''
 import random as rnd
 def choose_message(messages,random=True, number=0):

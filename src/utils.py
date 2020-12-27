@@ -38,7 +38,8 @@ def to_array(data):
 #     print(inout_seq)
 #     return inout_seq
 
-def create_sequences(dt, tw, n_features=5, data_type=torch.float32):
+def create_sequences(dt, tw, n_features=5, 
+                     data_type=torch.float32):
     '''We create a list of training data divided in inputs X and outputs y'''
     X = []
     y = []
@@ -51,6 +52,18 @@ def create_sequences(dt, tw, n_features=5, data_type=torch.float32):
         X.append(train_seq)
         y.append(train_label)
     return torch.transpose(torch.stack(X), 2, 1).type(data_type), torch.stack(y).type(data_type)
+
+def get_latest_sequence(dt, tw, n_features=5,
+                        data_type=torch.float32):
+    '''Get latest sequence for making prediction'''
+    X = []
+    idx = dt.shape[1] # index of the last element
+    seq = torch.zeros(n_features, tw)
+    for j in range(n_features):
+        seq[j]= dt[j][idx-tw:idx]
+    X.append(seq)
+    return torch.transpose(
+        torch.stack(X), 2, 1).type(data_type)
 
 import random as rnd
 def choose_message(messages,random=True, number=0):

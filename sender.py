@@ -3,7 +3,7 @@ from numpy import array
 import time
 from datetime import date
 import datetime
-from datetime import timedelta  
+from datetime import timedelta
 import csv
 import holidays # for importing the public holidays
 import re
@@ -27,7 +27,8 @@ Sender daemon: our goal is now to build a daemon which, given the prediction, wi
 
 polling_time = 300 # seconds to wait
 sent = False # We start giving the false condition for sent
-advance_time = 30 # Minutes we send the message in advance with respect to the prediction for being more confident the receiver will get the goodnight promptly
+advance_time = 30 # Minutes we send the message in advance with respect to the prediction for being more confident
+# the receiver will get the goodnight promptly
 telegram_path = "/usr/bin/telegram-cli"
 pubkey_path = "/home/fedebotu/tg/server.pub"
 
@@ -43,7 +44,7 @@ Do not install via snap; it won't work. Install via:
 sudo apt install telegram-cli
 '''
 tg = Telegram(
-	telegram=telegram_path, 
+	telegram=telegram_path,
 	pubkey_file=pubkey_path)
 
 receiver = Receiver(host="localhost", port=4458)
@@ -51,7 +52,7 @@ sender = Sender(host="localhost", port=4458)
 
 with open('data/prediction.txt', 'r') as f:
     # convert to string
-    prediction = datetime.datetime.strptime(f.read(), "%Y-%m-%d %H:%M:%S\n" ) 
+    prediction = datetime.datetime.strptime(f.read(), "%Y-%m-%d %H:%M:%S\n" )
 f.close()
 
 print('Starting main loop...')
@@ -67,17 +68,17 @@ while True:
     f.close()
 
     '''If we pass the prediction time, then we send a message and wait until the next prediction has come out '''
-    if(not sent and prediction < (datetime.datetime.now() - timedelta(minutes=advance_time))):
+    if not sent and prediction < (datetime.datetime.now() - timedelta(minutes=advance_time)):
         sender.send_msg(good_nighter, choose_message(messages)) # To be substituted with the good nighter
         sent = True
         print("Message has been sent")
-    
+
     with open('data/prediction.txt', 'r') as f:
         # convert to string
         old = prediction
         prediction = datetime.datetime.strptime(f.read(), "%Y-%m-%d %H:%M:%S\n")
-        if(prediction != old): sent=False # if we have a new prediction, let's send it when the time condition is met
+        if prediction != old: sent=False # if we have a new prediction, let's send it when the time condition is met
     f.close()
-    
+
     print('Next prediction: ',  prediction)
     time.sleep(polling_time)

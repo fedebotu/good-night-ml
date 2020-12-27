@@ -17,7 +17,7 @@ class MLP(nn.Module):
     """Multi-Layer Perceptron: this is the 
     simplest Deep Neural Network model
     https://www.kaggle.com/pinocookie/pytorch-simple-mlp"""
-    def __init__(self, input_dim, output_dim, hidden_layer=100):
+    def __init__(self, input_dim, output_dim, hidden_layer=64):
         super(MLP, self).__init__()
         self.input_dim = input_dim
         self.output_dim = output_dim
@@ -25,13 +25,14 @@ class MLP(nn.Module):
         self.layers = nn.Sequential(
             nn.Linear(self.input_dim, self.hidden_layer),
             nn.ReLU(),
-            nn.Linear(self.hidden_layer, self.output_dim),
-            #nn.Sigmoid() # use for constraining the output to [0,1]
+            nn.Linear(self.hidden_layer, self.hidden_layer),
+            nn.ReLU(),
+            nn.Linear(self.hidden_layer, self.output_dim)
+            #nn.Softmax() # use for constraining the output to [0,1]
         )
         
     def forward(self, x):
-        # convert tensor (128, 1, 28, 28) --> (128, 1*28*28)
-        x = x.reshape(1,self.input_dim)
+        #x = x.reshape(x.shape[0],self.input_dim)
         x = self.layers(x)
         return x
     
