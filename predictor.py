@@ -76,7 +76,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
 # ## Build the Dataset
 dataset = GoodNightDataset(data_file, n_timesteps)
-
+print('Dataset length: ', len(dataset))
 
 # ## Data Augmentation
 # Given that the training data is not much, we can insert some noise to augment it; this will also make the model less prone to overfitting
@@ -93,6 +93,7 @@ model.train()
 losses = []
 
 # Training loop
+print('\nStarting training loop...')
 for t in range(EPOCHS):
     X, y = next(iter(trainloader))
     optimizer.zero_grad()
@@ -114,6 +115,8 @@ for t in range(EPOCHS):
 # - Use different noise generator
 # - Find another way to augment the data
 # - Collect more data
+print('\nTest on training data: ')
+print('(Better to test on validation dataset when you have enough data)')
 with torch.no_grad():
     for i in range(len(dataset)):
         X, y = dataset[i]
@@ -125,20 +128,14 @@ with torch.no_grad():
 # ## Saving the time
 # We save the predicted time to send the message in a file, so that the Daemon can handle it
 now = datetime.datetime.now()
-seq_length = 3
-with open(data_file, newline='') as csvfile:
-    date_list = list(csv.reader(csvfile))
-date_list = convert_to_dates(date_list)
-data_tensor =  DataMiner(date_list).to_tensor(verbose=False)
-X, y = create_sequences(data_tensor, seq_length)
-x = get_latest_sequence(data_tensor, seq_length)
+x = dataset.get_latest_sequence()
 
 with torch.no_grad():
     p = model.forward(x.reshape(1,15)).item()
 print(p)
 p_sec = int(p*(max_hour+24-min_hour)*3600)
 prediction = now.replace(hour=min_hour, minute=0, second=0) + timedelta(seconds=p_sec)
-print('Expected time to go to sleep: ', prediction.strftime("%Y-%m-%d %H:%M:%S"))
+print('\nExpected time to go to sleep: ', prediction.strftime("%Y-%m-%d %H:%M:%S"))
 
 
 '''Write the value on a text file to be read by the Daemon'''
