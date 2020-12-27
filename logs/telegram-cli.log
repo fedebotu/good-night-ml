@@ -836,3 +836,42 @@ DEBUG:pytg:Closing sender.
 DEBUG:pytg.receiver:receiver thread existing: Not created.
 INFO:pytg:Asking to CLI to stop.
 DEBUG:pytg:Sender already stopped. Unable to issue safe_quit or quit to exit via socket.
+2020-12-28 01:42:42 INFO     Starting Telegram Executable: "/usr/bin/telegram-cli -R -W -P 4458 -k /home/fedebotu/tg/server.pub --json --permanent-peer-ids --permanent-peer-ids"
+2020-12-28 01:42:42 INFO     CLI did not responde.
+2020-12-28 01:42:43 INFO     CLI available.
+2020-12-28 01:42:43 INFO     Quit Sending. Not allowing sending anymore.
+2020-12-28 01:42:43 WARNING  Terminating currently sending request.
+2020-12-28 01:42:43 INFO     Currently not Sending.
+2020-12-28 01:42:43 INFO     Quit Sending. Not allowing sending anymore.
+2020-12-28 01:42:43 WARNING  Terminating currently sending request.
+2020-12-28 01:42:43 INFO     Currently not Sending.
+2020-12-28 01:42:43 INFO     Closing Connections.
+2020-12-28 01:42:43 WARNING  Terminating currently sending request.
+2020-12-28 01:42:43 INFO     Currently not Sending.
+2020-12-28 01:42:43 INFO     Asking to CLI to stop.
+2020-12-28 01:44:15 INFO     Starting Telegram Executable: "/usr/bin/telegram-cli -R -W -P 4458 -k /home/fedebotu/tg/server.pub --json --permanent-peer-ids --permanent-peer-ids"
+2020-12-28 01:44:15 INFO     CLI available.
+2020-12-28 01:44:20 INFO     Quit Sending. Not allowing sending anymore.
+2020-12-28 01:44:20 WARNING  Terminating currently sending request.
+2020-12-28 01:44:20 INFO     Currently not Sending.
+2020-12-28 01:44:20 INFO     Quit Sending. Not allowing sending anymore.
+2020-12-28 01:44:20 WARNING  Terminating currently sending request.
+2020-12-28 01:44:20 INFO     Currently not Sending.
+2020-12-28 01:44:20 INFO     Closing Connections.
+2020-12-28 01:44:20 WARNING  Terminating currently sending request.
+2020-12-28 01:44:20 INFO     Currently not Sending.
+2020-12-28 01:44:20 INFO     Asking to CLI to stop.
+2020-12-28 01:44:20 INFO     CLI did stop (1).
+2020-12-28 01:44:45 INFO     Starting Telegram Executable: "/usr/bin/telegram-cli -R -W -P 4458 -k /home/fedebotu/tg/server.pub --json --permanent-peer-ids --permanent-peer-ids"
+2020-12-28 01:44:45 INFO     CLI available.
+2020-12-28 01:45:39 INFO     Quit Sending. Not allowing sending anymore.
+2020-12-28 01:45:39 WARNING  Terminating currently sending request.
+2020-12-28 01:45:39 INFO     Currently not Sending.
+2020-12-28 01:45:39 INFO     Quit Sending. Not allowing sending anymore.
+2020-12-28 01:45:39 WARNING  Terminating currently sending request.
+2020-12-28 01:45:39 INFO     Currently not Sending.
+2020-12-28 01:45:39 INFO     Closing Connections.
+2020-12-28 01:45:39 WARNING  Terminating currently sending request.
+2020-12-28 01:45:39 INFO     Currently not Sending.
+2020-12-28 01:45:39 INFO     Asking to CLI to stop.
+2020-12-28 01:45:39 INFO     CLI did stop (1).
