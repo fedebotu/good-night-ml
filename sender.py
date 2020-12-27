@@ -36,7 +36,7 @@ pubkey_path = "/home/fedebotu/tg/server.pub"
 with open('data/good_nighter.txt','r') as f:
     good_nighter = "Federico_Berto" # str(f.read()) # User to send the good night wishes to
 f.close()
-print(good_nighter)
+print('Good nighter: ', good_nighter)
 
 '''
 Ubuntu instructions:
@@ -69,9 +69,11 @@ while True:
 
     '''If we pass the prediction time, then we send a message and wait until the next prediction has come out '''
     if not sent and prediction < (datetime.datetime.now() - timedelta(minutes=advance_time)):
-        sender.send_msg(good_nighter, choose_message(messages)) # To be substituted with the good nighter
+        msg = choose_message(messages)
+        sender.send_msg(good_nighter, msg)
         sent = True
-        print("Message has been sent")
+        print("\nThe following message has been sent: ", msg)
+        print("Waiting for the next prediction...\n")
 
     with open('data/prediction.txt', 'r') as f:
         # convert to string
