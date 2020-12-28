@@ -6,10 +6,17 @@ This project is about sending good night messages just before your loved one(s) 
 I started this for fun some time ago. After moving to Korea, I and a girl I had a (sort of) relationship with decided to just be friends due to the distance and not to send each other sweet things like the good night message. Since I didn't want to break the deal, I thought: _"Why not let an AI send the good night message? She will receive it and I technically wasn't the one sending it!"_
 So, here is how the idea was born. Nothing too complex, just an algorithm collecting the access timestamps, detecting the time when she goes to sleep and wake up, make some inferences with machine learning about tomorrow's time to go to bed, send a message just before that and... voilà! As you can imagine, it took me some time to figure out all the details of this project, but at the end it is kind of working. Was it something really useful? Probably not. But who cares, it was fun!
 
+## DISCLAIMER
+This project could be used to track the usage patterns of users without consent: therefore, even though this project is for fun, use at your own discretion and most importantly, citing Butcher in The Boys: _"Don't be a c*nt!"_
+
 ## Usage
 The following `.py` executables can be either used as daemons or executed normally. I recommend trying to first executing them with your account or someone you know (you don't want to send random messages around, do you?) and see how they work out; and finally converting them to system daemons so that they can be completely automatic.
 
+### Changing the `good_nighter`
+The variable `good_nighter` indicates the person you want to send the good night message to, you can change it `data/good_nighter.txt`. Remember to use the correct naming according to telegram, with underscores `_` indicating a space (i.e. `Federico_Berto`).
+
 ### `data_collector.py`
+This file collects every 
 
 ### `predictor.py`
 
@@ -18,6 +25,7 @@ The following `.py` executables can be either used as daemons or executed normal
 
 ## Adding the services to systemd
 In order to add `data_collector.py` and `sender.py` as system daemons, first create a file under `/etc/systemd/system` (the following example is for the `data_collector.py`, then change the names for `sender.py`):
+
 `sudo touch data-collector@goodnightml.service`
 
 Then copy and paste the following inside changing the parameters:
@@ -38,21 +46,30 @@ ExecStart=/usr/bin/python3 data_collector.py
 WantedBy=multi-user.target
 ```
 Try first if the script is working by starting it (if you are testing, remember to change the `good_nighter`!):
+
 `sudo systemctl start data-collector@goodnightml.service`
+
 `sudo systemctl status data-collector@goodnightml.service`
+
 If the status is `active`, it is working then stop the service
+
 `sudo systemctl stop data-collector@goodnightml.service`
 
 Enable the service to start automatically at reboot via the following command:
+
 `sudo systemctl enable data-collector@goodnightml.service`
 
 Now you can easily check the service status by doing:
+
 `sudo service data-collector@goodnightml.service status/start/stop`
 
 ## Adding the cron job
 The `predictor.py` does not need to always run in the background, so we can add it to crontab and run it as a periodic task: we just need one prediction (or set of predictions, if we are tracking multiple users) about the next time to go to sleep for each day:
+
 `sudo crontab -e`
+
 Add the following at the end of the file with your time (you may follow [this guide](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) as an easy reference)
+
 ```0 18 * * * /usr/bin/python3 [YOUR_PATH]/good-night-ml/predictor.py```
 
 ## Installing PyTorch on ARM devices (i.e. Raspberry Pi)
