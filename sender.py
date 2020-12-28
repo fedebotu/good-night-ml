@@ -68,7 +68,7 @@ while True:
     f.close()
 
     '''If we pass the prediction time, then we send a message and wait until the next prediction has come out '''
-    if not sent and prediction < (datetime.datetime.now() - timedelta(minutes=advance_time)):
+    if not sent and prediction < (datetime.datetime.now() + timedelta(minutes=advance_time)):
         msg = choose_message(messages)
         sender.send_msg(good_nighter, msg)
         sent = True
