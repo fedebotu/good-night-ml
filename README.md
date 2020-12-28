@@ -6,7 +6,7 @@ I started this for fun some time ago. After moving to Korea, I and a girl I had 
 So, here is how the idea was born. Nothing too complex, just an algorithm collecting the access timestamps, detecting the time when she goes to sleep and wake up, make some inferences with machine learning about tomorrow's time to go to bed, send a message just before that and... voilà! As you can imagine, it took me some time to figure out all the details of this project, but at the end it is kind of working. Was it something really useful? Probably not. But who cares, it was fun!
 
 ## Installing PyTorch on ARM devices (i.e. Raspberry Pi)
-Installing PyTorch on my Raspberry Pi 4B was not that easy for me, so I decided to include the instructions for installing it below with some comments. You can find the original post [here](https://stackoverflow.com/questions/62755739/libtorch-on-raspberry-cant-load-pt-file-but-working-on-ubuntu) and credits go to him.
+Installing PyTorch on my Raspberry Pi 4B was not that easy for me, so I decided to include the instructions for installing it below with some comments. You can find the [original Stackoverflow post](https://stackoverflow.com/questions/62755739/libtorch-on-raspberry-cant-load-pt-file-but-working-on-ubuntu) and credits go to that writer.
 
 ### Increase RBPi SWAP
 
