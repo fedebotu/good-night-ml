@@ -26,10 +26,14 @@ This file collects every
 ## Adding the services to systemd
 In order to add `data_collector.py` and `sender.py` as system daemons, first create a file under `/etc/systemd/system` (the following example is for the `data_collector.py`, then change the names for `sender.py`):
 
-`sudo touch data-collector@goodnightml.service`
+```
+sudo touch data-collector@goodnightml.service
+```
 
 Then copy and paste the following inside changing the parameters:
-`sudo nano data-collector@goodnightml.service`
+```
+sudo nano data-collector@goodnightml.service
+```
 
 ```
 [Unit]
@@ -47,30 +51,40 @@ WantedBy=multi-user.target
 ```
 Try first if the script is working by starting it (if you are testing, remember to change the `good_nighter`!):
 
-`sudo systemctl start data-collector@goodnightml.service`
+```
+sudo systemctl start data-collector@goodnightml.service
 
-`sudo systemctl status data-collector@goodnightml.service`
+sudo systemctl status data-collector@goodnightml.service
+```
 
 If the status is `active`, it is working then stop the service
 
-`sudo systemctl stop data-collector@goodnightml.service`
-
+```
+sudo systemctl stop data-collector@goodnightml.service
+```
 Enable the service to start automatically at reboot via the following command:
 
-`sudo systemctl enable data-collector@goodnightml.service`
-
+```
+sudo systemctl enable data-collector@goodnightml.service
+```
 Now you can easily check the service status by doing:
 
-`sudo service data-collector@goodnightml.service status/start/stop`
+```
+sudo service data-collector@goodnightml.service status/start/stop
+```
 
 ## Adding the cron job
 The `predictor.py` does not need to always run in the background, so we can add it to crontab and run it as a periodic task: we just need one prediction (or set of predictions, if we are tracking multiple users) about the next time to go to sleep for each day:
 
-`sudo crontab -e`
+```
+sudo crontab -e
+```
 
 Add the following at the end of the file with your time (you may follow [this guide](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) as an easy reference)
 
-```0 18 * * * /usr/bin/python3 [YOUR_PATH]/good-night-ml/predictor.py```
+```
+0 18 * * * /usr/bin/python3 [YOUR_PATH]/good-night-ml/predictor.py
+```
 
 ## Installing PyTorch on ARM devices (i.e. Raspberry Pi)
 Installing PyTorch on my Raspberry Pi 4B was not that easy for me, so I decided to include the instructions for installing it below with some comments. You can find the [original Stackoverflow post](https://stackoverflow.com/questions/62755739/libtorch-on-raspberry-cant-load-pt-file-but-working-on-ubuntu) and credits go to that writer.
