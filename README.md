@@ -4,7 +4,7 @@ This project is about sending good night messages just before your loved one(s) 
 ## Introduction
 ### Why this project?
 I started this for fun some time ago. After moving to Korea, I and a girl I had a (sort of) relationship with decided to just be friends due to the distance and not to send each other sweet things like the good night message. Since I didn't want to break the deal, I thought: _"Why not let an AI send the good night message? She will receive it and I technically wasn't the one sending it!"_
-So, here is how the idea was born. Nothing too complex, just an algorithm collecting the access timestamps, detecting the time when she goes to sleep and wake up, make some inferences with machine learning about tomorrow's time to go to bed, send a message just before that and... voilà! As you can imagine, it took me some time to figure out all the details of this project, but at the end it is kind of working. Was it something really useful? Probably not. But who cares, it was fun!
+So, here is how the idea was born. Nothing too complex, just an algorithm collecting the access timestamps, detecting the time when she goes to sleep and wake up, make some inferences with machine learning about tomorrow's time to go to bed, send a message just before that and... voilà! As you can imagine, it took me some time to figure out all the details of this project, but at the end it is kind of working. Was it something really useful? Probably not. But who cares, it was fun! :smile:
 
 ## DISCLAIMER
 This project could be used to track the usage patterns of users without consent: therefore, even though this project is for fun, use at your own discretion and most importantly, citing Butcher in The Boys: _"Don't be a c*nt!"_
@@ -16,9 +16,43 @@ The following `.py` executables can be either used as daemons or executed normal
 The variable `good_nighter` indicates the person you want to send the good night message to, you can change it `data/good_nighter.txt`. Remember to use the correct naming according to telegram, with underscores `_` indicating a space (i.e. `Federico_Berto`).
 
 ### `data_collector.py`
-This file collects every 
+Collects all the accesses and saves them in the file `data/LastSeenDataset.csv`. The following are variables to be tweaked:
+```
+polling_time = 30.0 # Send a request to the Telegram server for the status
+telegram_path = "/usr/bin/telegram-cli" # telegram-cli installation
+pubkey_path = "/home/[YOUR_USER]/tg/server.pub"
+```
 
 ### `predictor.py`
+Reads the data and reorganizes creates a with the following features to train the neural network with `src/data_miner.py`:
+1. Last seen time (arguably the most important)
+2. Wake up time
+3. Number of Telegram accesses during the previous day
+4. Public holiday presence in the following day (using the holidays library)
+5. Day of the week
+
+Then, we use a PyTorch model to train the model for predicting the next bedtime, such as:
+- MPL: Multi Layer Perceptron, simple deep neural network with hidden layer
+- RNN: Recurrent Neural Network, more suitable for time series
+- LSTM: Long Short Term Memory, an advancement of RNN
+- Transformer: currently (2020) state of the art, but OP for this task
+- ... Other
+
+Currently, we are using by default the MLP. You may want to try and make a different model work. 
+After the training, the executable saves the predicted time under `data/prediction.txt`.
+
+Variables to tweak:
+```
+# ## Parameters
+num_features = 5 # You may want to improve the dataset for extra features
+min_hour = 21 # Minimum hour for sleep detection
+max_hour = 5 # Maximum hour for sleep detection
+train_window = 3 # Sequence length of past days
+local_holidays = holidays.Italy(prov='BO') # Get the holidays in your local area ^^
+EPOCHS = 500 # Training epochs
+batch_size = 16 # Training batch size
+```
+Note that the implementation is quite rough and does not include a validation set, given the small size of the data, so we can just use our intuition to see if the model is performing well on new data. Besides, I still have a long way to go in Machine Learning (yeah, I'm a _noob_) but I'm here to learn and your suggestions and contributions to this project will be highly appreciated :smile:
 
 ### `sender.py`
 
