@@ -1,5 +1,5 @@
 # good-night-ml
-This project is about sending good night messages just before your loved one(s) goes to sleep, by predicting the time based on the Telegram accesses timestamps and/or last seen time.
+This project is a about sending good night messages just before your loved one(s) goes to sleep, by predicting with PyTorch the time they will go to sleep based on the Telegram accesses timestamps and/or last seen time.
 
 ## Introduction
 ### Why this project?
@@ -65,8 +65,24 @@ advance_time = 30 # Minutes we send the message in advance with respect to the p
 telegram_path = "/usr/bin/telegram-cli"
 pubkey_path = "/home/[YOUR_USERNAME]/tg/server.pub"
 ```
+## Setup
 
-## Adding the services to systemd
+Clone this repo
+```
+git clone https://github.com/Juju-botu/good-night-ml.git
+cd good-night-ml
+```
+Install the required packages; here is an incomplete list of the most important ones
+- torch (see guide below for ARM version)
+- pytg
+- numpy
+- json
+- datetime
+- csv
+- holidays
+
+
+### Adding the services to systemd
 In order to add `data_collector.py` and `sender.py` as system daemons, first create a file under `/etc/systemd/system` (the following example is for the `data_collector.py`, then change the names for `sender.py`):
 
 ```
@@ -129,7 +145,7 @@ Add the following at the end of the file with your time (you may follow [this gu
 0 18 * * * /usr/bin/python3 [YOUR_PATH]/good-night-ml/predictor.py
 ```
 
-## Installing PyTorch on ARM devices (i.e. Raspberry Pi)
+### Installing PyTorch on ARM devices (i.e. Raspberry Pi)
 Installing PyTorch on my Raspberry Pi 4B was not that easy for me, so I decided to include the instructions for installing it below with some comments. You can find the [original Stackoverflow post](https://stackoverflow.com/questions/62755739/libtorch-on-raspberry-cant-load-pt-file-but-working-on-ubuntu) and credits go to that writer.
 
 ### Increase RBPi SWAP
@@ -177,7 +193,7 @@ sudo ln -s /usr/local/bin/cmake /usr/bin/cmake
 sudo ldconfig
 ```
 
-## Building PyTorch from source to get libtorch backend for ARM
+### Building PyTorch from source to get libtorch backend for ARM
 
 > Don't forget to increase the SWAP to 2048M if you don't have 3GB or RAM.
 
@@ -251,7 +267,7 @@ import torch
 torch.__version__
 ```
 
-## Building your program with Torch
+### Building your program with Torch
 
 In your `CMakeLists.txt` :
 
