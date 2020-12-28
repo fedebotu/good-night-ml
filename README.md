@@ -1,7 +1,7 @@
 # good-night-ml
 
 <p align="center">
-  <img width="300" src="https://github.com/Juju-botu/good-night-ml/blob/main/notebooks/images/good-night-ml.svg">
+  <img width="400" src="https://github.com/Juju-botu/good-night-ml/blob/main/notebooks/images/good-night-ml.svg">
 </p>
 This project is a about sending good night messages just before your loved one(s) goes to sleep, by predicting with PyTorch the time they will go to sleep based on the Telegram accesses timestamps and/or last seen time.
 
