@@ -43,7 +43,6 @@ After the training, the executable saves the predicted time under `data/predicti
 
 Variables to tweak:
 ```
-# ## Parameters
 num_features = 5 # You may want to improve the dataset for extra features
 min_hour = 21 # Minimum hour for sleep detection
 max_hour = 5 # Maximum hour for sleep detection
@@ -52,10 +51,20 @@ local_holidays = holidays.Italy(prov='BO') # Get the holidays in your local area
 EPOCHS = 500 # Training epochs
 batch_size = 16 # Training batch size
 ```
-Note that the implementation is quite rough and does not include a validation set, given the small size of the data, so we can just use our intuition to see if the model is performing well on new data. Besides, I still have a long way to go in Machine Learning (yeah, I'm a _noob_) but I'm here to learn and your suggestions and contributions to this project will be highly appreciated :smile:
+You can also give a look at the models and change them for better performance or to reduce the overfitting (you can also tweak the `GoodNightDataset.noisy()` function for this purpose).
+Note that the implementation is quite rough and does not include a validation set, given the small size of the data, so we can just use our intuition to see if the model is performing well on new data. Besides, I still have a long way to go in Machine Learning (yeah, I'm a _noob_) but I'm here to learn and your suggestions and contributions to this project will be highly appreciated :wink:
 
 ### `sender.py`
+Reads the `data/prediction.txt` file and sends a message before the time to go to bed, hoping that our model is good enough so that the person reads the message at the right time.
+The messages are stored under `data/messages.txt` and you should modify them with your custom ones!
 
+Variables to tweak:
+```
+polling_time = 300 # seconds to between reading of the file
+advance_time = 30 # Minutes we send the message in advance with respect to the prediction, so that the good nighter reads themessage
+telegram_path = "/usr/bin/telegram-cli"
+pubkey_path = "/home/[YOUR_USERNAME]/tg/server.pub"
+```
 
 ## Adding the services to systemd
 In order to add `data_collector.py` and `sender.py` as system daemons, first create a file under `/etc/systemd/system` (the following example is for the `data_collector.py`, then change the names for `sender.py`):
