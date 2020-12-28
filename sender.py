@@ -34,7 +34,7 @@ pubkey_path = "/home/fedebotu/tg/server.pub"
 
 '''Create a file with the person to send the good night'''
 with open('data/good_nighter.txt','r') as f:
-    good_nighter = f.read() # User to send the good night wishes to
+    good_nighter = f.read().replace('\n', '') # User to send the good night wishes to
 f.close()
 print('Good nighter: ', good_nighter)
 
