@@ -122,7 +122,7 @@ Install python dependencies
 pip3 install setuptools pyyaml numpy
 ```
 
-Build and install PyTorch, time to grab a :coffee:, it make take a while.
+Build and install PyTorch, time to grab a :coffee:, it make take a while (took ~ 2 hours on my RPi 4B 4GB ram!)
 
 > Don't forget the -E that forces the environment variables to be used.
 
