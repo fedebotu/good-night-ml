@@ -3,6 +3,14 @@
 <p align="center">
   <img width="400" src="https://github.com/Juju-botu/good-night-ml/blob/main/notebooks/images/good-night-ml.svg">
 </p>
+
+<p align="center">
+  <img alt="Python" src="https://img.shields.io/badge/python%20-%2314354C.svg?&style=for-the-badge&logo=python&logoColor=white"/>
+  <img alt="PyTorch" src="https://img.shields.io/badge/PyTorch%20-%23EE4C2C.svg?&style=for-the-badge&logo=PyTorch&logoColor=white" />
+  <img alt="Telegram" src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" />
+  <img alt="Raspberry Pi" src="https://img.shields.io/badge/-Raspberry%20Pi-C51A4A?style=for-the-badge&logo=Raspberry-Pi"/>
+</p>
+
 This project is a about sending good night messages just before your loved one(s) goes to sleep, by predicting with PyTorch the time they will go to sleep based on the Telegram accesses timestamps and/or last seen time.
 
 ## Introduction
